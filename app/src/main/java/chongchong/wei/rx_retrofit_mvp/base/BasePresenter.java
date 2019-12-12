@@ -19,7 +19,7 @@ public abstract class BasePresenter<V, M> {
     protected V mView;//mProxyView
     protected M mModel;
 
-    protected void attachView(final V view) {
+    public void attachView(V view) {
         mViewReference = new SoftReference<V>(view);
 //        mView = mViewReference.get();
         //AOP思想，统一做非空判断
@@ -48,7 +48,7 @@ public abstract class BasePresenter<V, M> {
         }
     }
 
-    protected void detachView() {
+    public void detachView() {
         mViewReference.clear();
         mViewReference = null;
         mView = null;
