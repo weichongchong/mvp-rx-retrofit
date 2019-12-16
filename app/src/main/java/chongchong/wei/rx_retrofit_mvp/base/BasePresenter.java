@@ -14,7 +14,6 @@ import java.lang.reflect.Type;
  * 描述：
  */
 public abstract class BasePresenter<V, M> {
-    //看到很多博客这里使用软引用，其实没必要了，因为我们已经使用detachView 的方式处理了内存泄露问题了。这里看看就行，学习一下软引用的使用方式，没有实际意义
     private SoftReference<V> mViewReference;
     protected V mView;//mProxyView
     protected M mModel;
