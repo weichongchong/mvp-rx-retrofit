@@ -1,6 +1,7 @@
 package chongchong.wei.rx_retrofit_mvp.base;
 
 import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -14,13 +15,12 @@ import java.lang.reflect.Type;
  * 描述：
  */
 public abstract class BasePresenter<V, M> {
-    //看到很多博客这里使用软引用，其实没必要了，因为我们已经使用detachView 的方式处理了内存泄露问题了。这里看看就行，学习一下软引用的使用方式，没有实际意义
-    private SoftReference<V> mViewReference;
+    private WeakReference<V> mViewReference;
     protected V mView;//mProxyView
     protected M mModel;
 
     public void attachView(V view) {
-        mViewReference = new SoftReference<V>(view);
+        mViewReference = new WeakReference<V>(view);
 //        mView = mViewReference.get();
         //AOP思想，统一做非空判断
         mView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(), view.getClass().getInterfaces(), new InvocationHandler() {
